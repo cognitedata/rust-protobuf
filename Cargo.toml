@@ -1,21 +1,29 @@
-[workspace]
-members = [
-    "protoc",
-    "protoc-bin-vendored",
-    # Exclude test-protoc from the project, because it depends on binary
-    #"protoc/test-protoc",
-    "protoc-rust",
-    "protobuf",
-    "protobuf-fuzz",
-    "protobuf-codegen",
-    "protobuf-codegen-pure",
-    "protobuf-codegen-pure-test",
-    "protobuf-codegen-identical-test",
-    "protobuf-examples",
-    "protobuf-test",
-    "protobuf-test-common",
-    "perftest/vs-cxx",
-    "perftest/bytes",
-    "perftest/misc",
-    "ci-gen",
-]
+[package]
+
+name = "protobuf"
+version = "3.0.0-pre"
+authors = ["Stepan Koltsov <stepan.koltsov@gmail.com>"]
+edition = "2018"
+license = "MIT"
+homepage = "https://github.com/stepancheg/rust-protobuf/"
+repository = "https://github.com/stepancheg/rust-protobuf/"
+documentation = "https://github.com/stepancheg/rust-protobuf/blob/master/README.md"
+description = """
+Rust implementation of Google protocol buffers
+"""
+
+[lib]
+bench = false
+
+[features]
+with-bytes = ["bytes"]
+with-serde = ["serde", "serde_derive"]
+default = []
+
+[dependencies]
+bytes = { version = "1.0", optional = true }
+serde        = { version = "1.0", features = ["derive"], optional = true }
+serde_derive = { version = "1.0", optional = true }
+
+[package.metadata.docs.rs]
+all-features = true
